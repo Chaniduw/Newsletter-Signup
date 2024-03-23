@@ -35,10 +35,15 @@ app.post("/", function (req, res) {
 
   const options = {
     method: "POST",
-    auth: "chanidu:0a5629c24bc01a2aa9cc9ac0acc0c534-us8",
+    auth: "chanidu:1553eee74dd79eb2bd5b48ea70887afc-us8",
   };
 
   const request = https.request(url, options, function (response) {
+    if (response.statusCode === 200) {
+      res.sendFile(__dirname + "/success.html");
+    } else {
+      res.sendFile(__dirname + "/failure.html");
+    }
     response.on("data", function (data) {
       console.log(JSON.parse(data));
     });
